@@ -35,13 +35,15 @@
       50% { transform: translateY(-8px); }
     }
 
+    /* Wider Card */
     .card {
       background: white;
-      padding: 70px 42px;
+      padding: 60px 60px;      /* more horizontal padding */
       border-radius: 22px;
       box-shadow: 0 20px 45px rgba(0,0,0,0.25);
-      max-width: 400px;
-      min-height: 550px; /* added */
+      max-width: 600px;        /* wider card */
+      width: 90%;              /* responsive */
+      min-height: 400px;
       position: relative;
       animation: popIn 0.9s ease forwards;
     }
@@ -166,12 +168,12 @@
     setTimeout(() => el.remove(), 8000);
   }, 260);
 
-  /* No button dodges safely */
+  /* No button dodges safely within viewport */
   const noBtn = document.getElementById("no");
   ["mouseenter", "click", "touchstart"].forEach(evt => {
     noBtn.addEventListener(evt, () => {
-      const vw = window.innerWidth - noBtn.offsetWidth - 20;
-      const vh = window.innerHeight - noBtn.offsetHeight - 20;
+      const vw = window.innerWidth - noBtn.offsetWidth - 10;
+      const vh = window.innerHeight - noBtn.offsetHeight - 10;
       noBtn.style.position = "absolute";
       noBtn.style.left = Math.random() * vw + "px";
       noBtn.style.top = Math.random() * vh + "px";
