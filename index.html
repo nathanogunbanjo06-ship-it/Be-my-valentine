@@ -136,6 +136,7 @@
         alt="Valentine GIF"
       />
 
+      <h1>Hi Baby, would you be my valentine? 💕</h1>
 
       <div class="buttons">
         <button id="yes">Yes 💘</button>
@@ -154,6 +155,8 @@
         class="hero-gif"
         alt="Celebration GIF"
       />
+      <h1>It's a Date!!!!! ❤️</h1>
+      <p>I love you</p>
       <p>Yeah, you better have said yes tf 💐</p>
     </div>
   </div>
@@ -175,3 +178,53 @@
   /* No button dodges AFTER interaction */
   const noBtn = document.getElementById("no");
   ["mouseenter", "click", "touchstart"].forEach(evt => {
+    noBtn.addEventListener(evt, () => {
+      noBtn.style.position = "absolute";
+      noBtn.style.left = Math.random() * 70 + "vw";
+      noBtn.style.top = Math.random() * 70 + "vh";
+    });
+  });
+
+  /* Confetti */
+  const canvas = document.getElementById("confetti");
+  const ctx = canvas.getContext("2d");
+
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resizeCanvas();
+  window.addEventListener("resize", resizeCanvas);
+
+  function confettiBlast() {
+    const pieces = Array.from({ length: 160 }, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      dx: Math.random() * 5 - 2.5,
+      dy: Math.random() * 5 - 2.5,
+      size: Math.random() * 18 + 14,
+      emoji: "💖"
+    }));
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      pieces.forEach(p => {
+        ctx.font = `${p.size}px serif`;
+        ctx.fillText(p.emoji, p.x, p.y);
+        p.x += p.dx;
+        p.y += p.dy;
+      });
+      requestAnimationFrame(animate);
+    }
+    animate();
+  }
+
+  document.getElementById("yes").addEventListener("click", () => {
+    document.getElementById("screen1").classList.remove("active");
+    document.getElementById("screen2").classList.add("active");
+    confettiBlast();
+  });
+</script>
+
+</body>
+</html>
