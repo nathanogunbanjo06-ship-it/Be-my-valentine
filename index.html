@@ -13,7 +13,6 @@
       overflow: hidden;
     }
 
-    /* Screens */
     .screen {
       display: none;
       height: 100vh;
@@ -27,7 +26,6 @@
       display: flex;
     }
 
-    /* Floating wrapper */
     .card-wrapper {
       animation: float 4s ease-in-out infinite;
     }
@@ -37,13 +35,13 @@
       50% { transform: translateY(-8px); }
     }
 
-    /* Card */
     .card {
       background: white;
-      padding: 48px 36px;
+      padding: 70px 42px;
       border-radius: 22px;
       box-shadow: 0 20px 45px rgba(0,0,0,0.25);
-      max-width: 380px;
+      max-width: 400px;
+      min-height: 550px; /* added */
       position: relative;
       animation: popIn 0.9s ease forwards;
     }
@@ -53,7 +51,6 @@
       to   { transform: scale(1); opacity: 1; }
     }
 
-    /* GIF */
     .hero-gif {
       width: 100%;
       border-radius: 16px;
@@ -68,7 +65,6 @@
       line-height: 1.3;
     }
 
-    /* Button layout */
     .buttons {
       display: flex;
       justify-content: center;
@@ -96,10 +92,9 @@
 
     #no {
       background: #ddd;
-      position: relative; /* starts normal */
+      position: relative;
     }
 
-    /* Floating emojis */
     .float-emoji {
       position: absolute;
       bottom: -30px;
@@ -171,13 +166,15 @@
     setTimeout(() => el.remove(), 8000);
   }, 260);
 
-  /* No button dodges AFTER interaction */
+  /* No button dodges safely */
   const noBtn = document.getElementById("no");
   ["mouseenter", "click", "touchstart"].forEach(evt => {
     noBtn.addEventListener(evt, () => {
+      const vw = window.innerWidth - noBtn.offsetWidth - 20;
+      const vh = window.innerHeight - noBtn.offsetHeight - 20;
       noBtn.style.position = "absolute";
-      noBtn.style.left = Math.random() * 70 + "vw";
-      noBtn.style.top = Math.random() * 70 + "vh";
+      noBtn.style.left = Math.random() * vw + "px";
+      noBtn.style.top = Math.random() * vh + "px";
     });
   });
 
